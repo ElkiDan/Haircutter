@@ -1,0 +1,210 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-color: #252525;
+    direction: rtl;
+    font-family: Rubik;
+    color: white;
+}
+.flex-column{
+    flex-direction:column;
+}
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    margin-top: 10vh;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.updateAppsButton{
+         border: none;
+        border-radius: 2px;
+        padding: 1vmin 2vmin;
+        background-color: #0e7da8;
+        color: white;
+        outline: none;
+        cursor: pointer;
+                width:100%;
+
+}
+.showAppsButton{
+      border: none;
+        border-radius: 2px;
+        padding: 1vmin 2vmin;
+        background-color: #0ea84f;
+        color: white;
+        outline: none;
+        cursor: pointer;
+        width:100%;
+}
+.cardContainer {
+    margin: 0 10vmin;
+}
+.appsActionForSub{
+
+}
+.hide{
+    display:none !important;
+}
+.cardButtonsHolder {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction:column;
+}
+.cardButtonsHolder > div{
+      display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin-bottom: 2vmin;
+}
+
+
+    .cardButtonsHolder > div > input[type=button] {
+        border: none;
+        border-radius: 2px;
+        padding: 1vmin 2vmin;
+        background-color: #0ea84f;
+        color: white;
+        outline: none;
+        cursor: pointer;
+        flex-grow:1;
+        margin:0.2vmin;
+    }
+
+        .cardButtonsHolder > div > input[type=button]:disabled {
+            background-color: #808080;
+            cursor: pointer;
+        }
+
+.cardTitle {
+    padding: 0.4vmin 0;
+    text-align: right;
+    border-bottom: 1px solid white;
+    margin-bottom: 1.2vmin;
+    width: 100%;
+}
+
+.cardSearchBarContainer {
+    margin-bottom: 2vmin;
+}
+
+.cardSearchBar {
+    border: none;
+    border-radius: 2px;
+    padding: 1vmin;
+    box-shadow: 0px 0px 1px 1px rgba(252,252,252,0.2);
+    width: 100%;
+    outline: none;
+}
+
+.cardTable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cardTableHeaders {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: 100%;
+    width: 100%;
+}
+
+    .cardTableHeaders > div, .cardTableContent > div {
+        text-align: center;
+    }
+
+.cardTableContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: 100%;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid rgba(243,243,243,0.7);
+}
+
+table {
+    display: inherit;
+    border-spacing: 0;
+}
+
+tbody {
+    display: inline-table;
+    width: 100%;
+}
+
+td, th {
+    padding: 0.5vmin 2vmin;
+}
+
+th {
+    padding: 1vmin 2vmin;
+    border-bottom: 1px solid white;
+}
+
+.tableHeader:hover {
+    background-color: transparent !important;
+    cursor: none;
+    pointer-events: none;
+}
+
+tr:hover {
+    background-color: #0ea84f;
+    cursor: pointer;
+}
+.activeTr{
+        background-color: #0ea84f;
+
+}
+
+.popupWindow{
+    direction:rtl;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:60vw;
+    height:80vh;
+    overflow:auto;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background-color:white;
+    border-radius:2px;
+    overflow:visible;
+    color:black;
+}
+.popupWindowClose{
+    position:absolute;
+    top:0%;
+    right:0%;
+    transform:translate(50%,-50%);
+    width:7vmin;
+    height:7vmin;
+    font-size:3.5vmin;
+    background-color:#0ea84f;
+    z-index:3;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    color:white;
+}
+#popupinfo{
+    max-height:100%;
+    overflow:auto;
+}
+.margin-top-bottom-1vmin{
+    margin:1vmin 0;
+}

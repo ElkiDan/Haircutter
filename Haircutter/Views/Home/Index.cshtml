@@ -1,0 +1,143 @@
+﻿@using Haircutter.Models
+
+@model List<Customer>
+
+<script type="text/javascript">
+    function test() {
+        alert("test");
+    }
+    $(document).ready(function () {
+        $(".subTr").click(function () {
+            $('.subTr').not(this).removeClass('activeTr');
+            $(this).toggleClass('activeTr');
+            if ($(".subTr").hasClass("activeTr")) {
+                $(".appsActionForSub").removeClass("hide");
+               
+            }
+            else {
+                $(".appsActionForSub").addClass("hide");
+            }
+        })
+        $(".popupWindowClose").click(function () {
+            $("#popup").fadeOut();
+        })
+        $("#updateApp").click(function () {
+            $('#updateApp').attr('disabled', 'disabled');
+            var url = "@Url.Action("updateApp", "Home")";
+            var id = $(".activeTr").attr('id');
+            $.ajax({
+                url: url,
+                data: { userid: id },
+                cache: false,
+                type: "POST",
+                success: function (respone) {
+                    $('#updateApp').removeAttr('disabled');
+                    location.reload();
+                },
+                error: function (reponse) {
+                    alert(reponse);
+                }
+            });
+        });
+
+        $("#displayApp").click(function () {
+            //$('#displayApp').attr('disabled', 'disabled');
+            var id = $(".activeTr").attr('id');
+            var param = id;
+            var url = '@Url.Action("DisplayApps", "Home", new { userid = "__param__" })';
+            url = url.replace('__param__', encodeURIComponent(param));
+            $("#popupinfo").load(url);
+            $("#popup").fadeIn();
+            //window.location.href = url.replace('__param__', encodeURIComponent(param));
+        });
+
+        $("#newCustomer").click(function () {
+
+            var url = '@Url.Action("AddNewCustomer", "Home")';
+            $("#popupinfo").load(url);
+            $("#popup").fadeIn();
+            //window.location.href = url.replace('__param__', encodeURIComponent(param));
+        });
+    });
+</script>
+<div class="container">
+    <div class="cardContainer">
+        <div class="cardTitle">
+            <span>מנויים</span>
+        </div>
+        <div class="cardSearchBarContainer">
+            <input type="text" placeholder="שם מינוי" class="cardSearchBar" />
+        </div>
+        <div class="cardButtonsHolder">
+            <div>
+                <input type="button" value="מנוי חדש" />
+                <input disabled="disabled" type="button" value="עדכון מנוי" />
+            </div>
+            <div class="appsActionForSub hide">
+                <input id="updateApp" class="updateAppsButton" type="button" value="עדכן פגישה" />
+                <input class="updateAppsButton" type="button" value="הוספת פגישות" />
+
+                <input id="displayApp" class="showAppsButton" type="button" value="הצג פגישות" />
+            </div>
+        </div>
+        <table id="subsTable">
+            <tr class="tableHeader">
+                <th>שם הלקוח</th>
+                <th>צבע</th>
+                <th>מספר פגישות</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                if (item.isSub)
+                {
+                    <tr class="subTr" id="@item.Id">
+                        <td>@item.firstName</td>
+                        <td>#@item.color</td>
+                        <td>@item.appointmentsCount</td>
+
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+    <div class="cardContainer">
+        <div class="cardTitle">
+            <span>לקוחות</span>
+        </div>
+        <div class="cardSearchBarContainer">
+            <input type="text" placeholder="שם לקוח" class="cardSearchBar" />
+        </div>
+        <div class="cardButtonsHolder">
+            <div>
+                <input id="newCustomer" type="button" value="לקוח חדש" />
+                <input disabled="disabled" type="button" value="עדכון לקוח" />
+            </div>
+        </div>
+        <table id="customersTable">
+            <tr class="tableHeader">
+                <th>שם הלקוח</th>
+                <th>צבע</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                if (!item.isSub)
+                {
+                    <tr>
+                        <td>@item.firstName</td>
+                        <td>#@item.color</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+    <div id="popup" class="popupWindow">
+        <div id="popupinfo">
+
+        </div>
+        <div class="popupWindowClose">
+            X
+        </div>
+    </div>
+</div>

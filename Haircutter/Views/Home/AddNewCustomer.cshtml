@@ -1,0 +1,48 @@
+﻿@using Haircutter.Models
+
+@model Customer
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+        $("#addNewCustomer").click(function () {
+            var customer = {};
+            var url = '@Url.Action("AddCustomer", "Home")';
+            customer.firstName = $("#firstName").val();
+            customer.lastName = $("#lastName").val();
+            customer.color = $("#color").val();
+
+
+            $.ajax({
+                url: url,
+                data: { customer: customer },
+                cache: false,
+                type: "POST",
+                success: function(respone) {
+
+                    location.reload();
+                },
+                error: function(reponse) {
+                    alert(reponse);
+                }
+            });
+        });
+    });
+</script>
+
+<div class="container">
+    <div style="color: black">
+        <input id="firstName" type="text" />
+    </div>
+    <div>
+        <input id="lastName" type="text" />
+    </div>
+    <div>
+        <input id="color" type="text" />
+    </div>
+    <div>
+        <input id="addNewCustomer" type="button" value="הוסף לקוח חדש" />
+    </div>
+</div>
+

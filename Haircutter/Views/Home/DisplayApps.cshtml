@@ -1,0 +1,17 @@
+﻿@using Haircutter.Models
+
+@model List<Appointment>
+
+
+<div>
+    <h3>פגישות למנוי</h3>
+
+    <div>
+        @foreach (var x in Model)
+        {
+            <div class="margin-top-bottom-1vmin">
+                @x.appointmentDate
+            </div>
+        }
+    </div>
+</div>
