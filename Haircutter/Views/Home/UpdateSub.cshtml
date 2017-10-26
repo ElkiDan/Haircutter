@@ -1,0 +1,55 @@
+﻿<script type="text/javascript">
+
+    $(document).ready(function() {
+        $("#updateSubButton").click(function () {
+
+            var url = '@Url.Action("updateSub", "Home")';
+            var id = $(".activeTr").attr('id');
+
+            var color = $("#color").val();
+            var appToAdd = $("#appToAdd").val();
+
+
+            $.ajax({
+                url: url,
+                data: { userId: id, color: color, appToAdd: appToAdd },
+                cache: false,
+                type: "POST",
+                success: function(respone) {
+
+                    location.reload();
+                },
+                error: function(reponse) {
+                    alert(reponse);
+                }
+            });
+        });
+        $("#deleteSubButton").click(function () {
+
+            var url = '@Url.Action("deleteSubOrCus", "Home")';
+            var id = $(".activeTr").attr('id');
+
+            $.ajax({
+                url: url,
+                data: { userId: id },
+                cache: false,
+                type: "POST",
+                success: function (respone) {
+
+                    location.reload();
+                },
+                error: function (reponse) {
+                    alert(reponse);
+                }
+            });
+        });
+    });
+
+</script>
+
+<input id="color" type="text" placeholder="הזן צבע חדש"/>
+<input id="appToAdd" type="text" placeholder="מספר פגישות להוספה"/>
+
+<input id="updateSubButton" type="button" value="עדכן"/>
+<input id="deleteSubButton" type="button" value="מחק מנוי" />
+

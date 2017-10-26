@@ -7,37 +7,51 @@
         alert("test");
     }
     $(document).ready(function () {
-        $(".subTr").click(function () {
+
+        $(".subTr").click(function() {
             $('.subTr').not(this).removeClass('activeTr');
+            $('.cusTr').not(this).removeClass('activeTr');
+
             $(this).toggleClass('activeTr');
             if ($(".subTr").hasClass("activeTr")) {
                 $(".appsActionForSub").removeClass("hide");
-               
-            }
-            else {
+                $("#updateSub").prop("disabled", "");
+                $("#updateCus").prop("disabled", "disabled");
+
+
+            } else {
+
                 $(".appsActionForSub").addClass("hide");
+                $("#updateSub").prop("disabled", "disabled");
+
             }
-        })
+        });
+
+        $(".cusTr").click(function () {
+            $('.cusTr').not(this).removeClass('activeTr');
+            $('.subTr').not(this).removeClass('activeTr');
+
+            $(this).toggleClass('activeTr');
+            if ($(".cusTr").hasClass("activeTr")) {
+                $("#updateCus").prop("disabled", "");
+
+                $(".appsActionForSub").addClass("hide");
+                $("#updateSub").prop("disabled", "disabled");
+
+            } else {
+                $("#updateCus").prop("disabled", "disabled");
+
+
+            }
+        });
+
         $(".popupWindowClose").click(function () {
             $("#popup").fadeOut();
         })
         $("#updateApp").click(function () {
-            $('#updateApp').attr('disabled', 'disabled');
-            var url = "@Url.Action("updateApp", "Home")";
-            var id = $(".activeTr").attr('id');
-            $.ajax({
-                url: url,
-                data: { userid: id },
-                cache: false,
-                type: "POST",
-                success: function (respone) {
-                    $('#updateApp').removeAttr('disabled');
-                    location.reload();
-                },
-                error: function (reponse) {
-                    alert(reponse);
-                }
-            });
+            var url = '@Url.Action("UpdateApp", "Home")';
+            $("#popupinfo").load(url);
+            $("#popup").fadeIn();
         });
 
         $("#displayApp").click(function () {
@@ -50,10 +64,32 @@
             $("#popup").fadeIn();
             //window.location.href = url.replace('__param__', encodeURIComponent(param));
         });
+        $("#updateSub").click(function () {
+
+            var url = '@Url.Action("UpdateSub", "Home")';
+            $("#popupinfo").load(url);
+            $("#popup").fadeIn();
+            //window.location.href = url.replace('__param__', encodeURIComponent(pa
+        });
+
+        $("#updateCus").click(function () {
+
+            var url = '@Url.Action("UpdateCustomer", "Home")';
+            $("#popupinfo").load(url);
+            $("#popup").fadeIn();
+            //window.location.href = url.replace('__param__', encodeURIComponent(pa
+        });
 
         $("#newCustomer").click(function () {
 
             var url = '@Url.Action("AddNewCustomer", "Home")';
+            $("#popupinfo").load(url);
+            $("#popup").fadeIn();
+            //window.location.href = url.replace('__param__', encodeURIComponent(pa
+        });
+        $("#newSub").click(function () {
+
+            var url = '@Url.Action("AddNewSub", "Home")';
             $("#popupinfo").load(url);
             $("#popup").fadeIn();
             //window.location.href = url.replace('__param__', encodeURIComponent(pa
@@ -66,12 +102,12 @@
             <span>מנויים</span>
         </div>
         <div class="cardSearchBarContainer">
-            <input type="text" placeholder="שם מינוי" class="cardSearchBar" />
+            <input type="text" placeholder="שם מנוי" class="cardSearchBar" />
         </div>
         <div class="cardButtonsHolder">
             <div>
-                <input type="button" value="מנוי חדש" />
-                <input disabled="disabled" type="button" value="עדכון מנוי" />
+                <input id="newSub" type="button" value="מנוי חדש" />
+                <input id="updateSub" disabled="disabled" type="button" value="עדכון מנוי" />
             </div>
             <div class="appsActionForSub hide">
                 <input id="updateApp" class="updateAppsButton" type="button" value="עדכן פגישה" />
@@ -111,7 +147,7 @@
         <div class="cardButtonsHolder">
             <div>
                 <input id="newCustomer" type="button" value="לקוח חדש" />
-                <input disabled="disabled" type="button" value="עדכון לקוח" />
+                <input id="updateCus" disabled="disabled" type="button" value="עדכון לקוח" />
             </div>
         </div>
         <table id="customersTable">
@@ -123,7 +159,7 @@
             {
                 if (!item.isSub)
                 {
-                    <tr>
+                    <tr class="cusTr" id="@item.Id">
                         <td>@item.firstName</td>
                         <td>#@item.color</td>
                     </tr>

@@ -8,6 +8,7 @@ namespace Haircutter.Models
         public int Id { get; set; }
         public Nullable<int> customerId { get; set; }
         public Nullable<System.DateTime> appointmentDate { get; set; }
+        public string comment { get; set; }
         public virtual Customer Customer { get; set; }
     }
 }

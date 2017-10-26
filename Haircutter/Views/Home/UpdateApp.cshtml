@@ -1,0 +1,28 @@
+﻿<script type="text/javascript">
+    $(document).ready(function() {
+        $("#updateAppButton").click(function() {
+            
+            var url = "@Url.Action("updateApp", "Home")";
+            var id = $(".activeTr").attr('id');
+            var comment = $("#appComment").val();
+
+            $.ajax({
+                url: url,
+                data: { userid: id, comment: comment },
+                cache: false,
+                type: "POST",
+                success: function(respone) {
+                    $('#updateApp').removeAttr('disabled');
+                    location.reload();
+                },
+                error: function(reponse) {
+                    alert(reponse);
+                }
+            });
+        });
+    });
+</script>
+
+<input id="appComment" type="text" placeholder="הערה" />
+<input id="updateAppButton" type="button" value="עדכן פגישה"/>
+

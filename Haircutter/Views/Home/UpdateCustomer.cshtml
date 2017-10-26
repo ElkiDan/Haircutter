@@ -1,0 +1,54 @@
+﻿<script type="text/javascript">
+
+    $(document).ready(function() {
+        $("#updateCustomerButton").click(function () {
+
+            var url = '@Url.Action("updateCustomer", "Home")';
+            var id = $(".activeTr").attr('id');
+
+            var color = $("#color").val();
+
+
+            $.ajax({
+                url: url,
+                data: { userId: id, color: color },
+                cache: false,
+                type: "POST",
+                success: function(respone) {
+
+                    location.reload();
+                },
+                error: function(reponse) {
+                    alert(reponse);
+                }
+            });
+        });
+
+        $("#deleteCusButton").click(function () {
+
+            var url = '@Url.Action("deleteSubOrCus", "Home")';
+            var id = $(".activeTr").attr('id');
+
+            $.ajax({
+                url: url,
+                data: { userId: id },
+                cache: false,
+                type: "POST",
+                success: function (respone) {
+
+                    location.reload();
+                },
+                error: function (reponse) {
+                    alert(reponse);
+                }
+            });
+        });
+    });
+
+</script>
+
+<input id="color" type="text" placeholder="הזן צבע חדש" />
+
+<input id="updateCustomerButton" type="button" value="עדכן" />
+
+<input id="deleteCusButton" type="button" value="מחק לקוח" />
